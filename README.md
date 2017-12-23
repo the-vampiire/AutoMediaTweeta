@@ -12,7 +12,7 @@
 - uses a `tags.txt` file that holds a CSV of hashtags to apply to each tweet
 - handles `mp4, png, jpg, jpeg, gif, mpeg` image / gif / video file types 
 
-## Instructions
+# Instructions
 
 #### Setup
 - clone this repo using:
