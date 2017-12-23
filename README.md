@@ -12,14 +12,14 @@
 - uses a `tags.txt` file that holds a CSV of hashtags to apply to each tweet
 - handles `mp4, png, jpg, jpeg, gif, mpeg` image / gif / video file types 
 
-## Instructions
+# Instructions
 
-#### Setup
+## Setup
 - clone this repo using `git clone https://github.com/the-vampiire/auto-media-tweeting.git auto_tweet`
 - in the newly created `auto_tweet` directory create the following directories
 	- `dump` directory
 	- `used` directory
-### Customize
+## Customize
 - in the `dump` directory add all of the image / gif / video files you would like to upload
 - leave the `used` directory empty
 - in the `config.py` file add your Twitter credentials
