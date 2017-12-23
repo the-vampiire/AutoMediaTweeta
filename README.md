@@ -1,5 +1,5 @@
 # What is my purpose?
-- tweet one file at a time out of a `dump` directory using a list of hashtags, reports with a success or failure, then moves the tweeted file to the `used` directory
+- tweet one file at a time out of a `unused` directory using a list of hashtags, reports with a success or failure, then moves the tweeted file to the `used` directory
 
 # Forked Modifications
 - add Twitter credentials to the `config.py` file
@@ -7,7 +7,7 @@
 	- CONSUMER_SECRET
 	- ACCESS_TOKEN
 	- ACCESS_TOKEN_SECRET
-- uses `dump` directory to store the collection of unused images / videos
+- uses `unused` directory to store the collection of unused images / videos
 - uses `used` directory to store the used files that are moved after tweeting
 - uses a `tags.txt` file that holds a CSV of hashtags to apply to each tweet
 - handles `mp4, png, jpg, jpeg, gif, mpeg` image / gif / video file types 
@@ -17,10 +17,10 @@
 #### Setup
 - clone this repo using:
 	- `git clone https://github.com/the-vampiire/auto-media-tweeting.git auto_tweet`
-- in the newly created `auto_tweet` directory create the `dump` directory and `used` directory using:
-	- `mkdir dump used`
+- in the newly created `auto_tweet` directory create the `unused` directory and `used` directory using:
+	- `mkdir unused used`
 ### Customize
-- in the `dump` directory add all of the image / gif / video files you would like to upload
+- in the `unused` directory add all of the image / gif / video files you would like to upload
 - leave the `used` directory empty
 - in the `config.py` file add your Twitter credentials
 	- you can find these on your app page at https://apps.twitter.com (if you dont have an app create one for free to obtain the credentials)

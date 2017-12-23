@@ -1,6 +1,6 @@
 test.py
 local_config.py
 local_tags.txt
-dump/
+unused/
 used/
 __pycache__/

@@ -5,11 +5,11 @@ POST_TWEET_URL = 'https://api.twitter.com/1.1/statuses/update.json'
 
 class AnyMediaTweet(object):
 
-  def __init__(self, media_path, mime_type, o_auth_token, tags):
+  def __init__(self, media_path, mime_type, text, o_auth_token):
    
     self.media_path = media_path
     self.mime_type = mime_type
-    self.tags = tags or "Automated using the Any Media Tweet script by #vampiire"
+    self.text = text or "Automated using the Any Media Tweet script by #vampiire"
     self.token = o_auth_token
     self.total_bytes = os.path.getsize(self.media_path)
     self.media_id = None
@@ -116,7 +116,7 @@ class AnyMediaTweet(object):
 
   def tweet(self):
     request_data = {
-      'status': self.tags,
+      'status': self.text,
       'media_ids': self.media_id
     }
 
