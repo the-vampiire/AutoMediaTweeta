@@ -2,7 +2,7 @@ import os, shutil
 from requests_oauthlib import OAuth1
 
 # import config credentials for oAuth
-from local_config import CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET
+from config import CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET
 
 # import MediaTweet class
 from any_media_tweet import AnyMediaTweet
