@@ -17,6 +17,8 @@
 #### Setup
 - clone this repo using:
 	- `git clone https://github.com/the-vampiire/auto-media-tweeting.git auto_tweet`
+- install the dependancies using:
+	-	`pip install -r requirements.txt`
 - in the newly created `auto_tweet` directory create the `unused` directory and `used` directory using:
 	- `mkdir unused used`
 ### Customize
@@ -30,10 +32,18 @@
 	- example content of `tags.txt`: `coding, python, autotweeting`
 	- would be automatically converted and added to the upload as `#coding #python #autotweeting`
 
+### Usage
+- to start up the server and begin using the interface enter the following command (while in the `auto_tweet` directory)
+	- `python main.py`
+- click the url or navigate to `127.0.0.1:5000` in your browser
+- use the dropdown menu to select the media to upload
+- use the text field to input some text / hashtags
+- hit the tweet button!
+
 <hr>
 <hr>
 
-## Original Documentation Below
+# Original Documentation Below
 
 # Large Video Upload
 
