@@ -2,3 +2,4 @@ oauthlib==1.1.2
 requests==2.10.0
 requests-oauthlib==0.6.1
 flask==0.12.2
+instapy-cli==0.0.3

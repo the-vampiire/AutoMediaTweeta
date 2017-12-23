@@ -1,10 +1,10 @@
 {% extends "main.html" %}
 
 {% block content %}
-{% if dump_directory != [] %}
+{% if unused_directory != [] %}
 <h2>Available Media (refresh if media not appearing)</h2>
 <ul>
-    {% for file in dump_directory %}
+    {% for file in unused_directory %}
         <li>
             {{ file }}
         </li>
@@ -12,14 +12,19 @@
 </ul>
 {% endif %}
 
-{% if dump_directory != [] %}
+{% if unused_directory != [] %}
 <h2>Pick What to Tweet</h2>
 <form action="/tweet" method="post">
     <label>
-        I want to tweet
+        I want to post on
+        <select name="post_options">
+            {% for option in post_options %}
+                <option value="{{ option['value'] }}">{{ option['name'] }}</option>
+            {% endfor %}
+        </select>
         <select name="media">
             <!-- need to loop over watchlist to create option elements -->
-            {% for file in dump_directory %}
+            {% for file in unused_directory %}
                 <option value="{{ file }}">{{ file }}</option>
             {% endfor %}
         </select>
@@ -28,10 +33,11 @@
         tweet text / hashtags
         <input required="true" type="text" name="text" size="50"/>
     </label>
-    <input type="submit" value="Tweet it"/>
+    <input type="submit" value="Post it"/>
     {% else %}
-    <h2>the "unused" directory is empty</h2>
-    <h3>add new media files to it then refresh the page</h3>
+        <h2>the "unused" directory is empty</h2>
+        <h3>add new media files to it then refresh the page</h3>
     {% endif %}
 </form>
+<script src="./static/main.js"></script>
 {% endblock %}

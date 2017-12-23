@@ -9,12 +9,11 @@ class AnyMediaTweet(object):
    
     self.media_path = media_path
     self.mime_type = mime_type
-    self.text = text or "Automated using the AutoMediaTweeta script by #vampiire"
+    self.text = text or "Automated using the AutoMediaTweeta script adapted by #vampiire"
     self.token = o_auth_token
     self.total_bytes = os.path.getsize(self.media_path)
     self.media_id = None
     self.processing_info = None
-    self.response = None
 
   def upload_init(self):
     request_data = {

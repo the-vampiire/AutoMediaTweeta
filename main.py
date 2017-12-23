@@ -1,26 +1,36 @@
 from flask import Flask, request, redirect, render_template
-from tweet_media import send_tweet, refresh_directory
-import cgi
+from tweet_media import post_media, refresh_directory
+import cgi, os
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
 
+post_options = [
+    {
+        'name': 'twitter and instagram',
+        'value': 'both'
+    },
+    {
+        'name': 'twitter',
+        'value': 'twitter'
+    },
+    {
+        'name': 'instagram',
+        'value': 'instagram'
+    }]
+
 @app.route("/tweet", methods=['POST'])
 def tweet_media():
-    dump_directory = refresh_directory()
     media = request.form['media']
     tweet_text = request.form['text']
-    if media not in dump_directory:
-        error = "'{0}' is not in your dump directory".format(media)
-        # redirect to homepage, and include error as a query parameter in the URL
-        return redirect("/?error=" + error)
+    option = request.form['post_options']
 
-    send_tweet(media, tweet_text)
-    return render_template('edit.html', dump_directory = refresh_directory())
+    post_media(media, tweet_text, option)
+    return render_template('edit.html', unused_directory = refresh_directory(), post_options = post_options)
 
 @app.route("/")
-def index(): 
-    encoded_error = request.args.get("error")
-    return render_template('edit.html', dump_directory = refresh_directory(), quote=True)
+def index():
+    javascript = os.path.relpath('./static/main.js')
+    return render_template('edit.html', javascript = javascript, unused_directory = refresh_directory(), post_options = post_options)
 
 app.run()
