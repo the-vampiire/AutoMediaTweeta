@@ -15,8 +15,10 @@
 # Instructions
 
 ## Setup
-- clone this repo using `git clone https://github.com/the-vampiire/auto-media-tweeting.git auto_tweet`
-- in the newly created `auto_tweet` directory create the following directories
+- clone this repo using `git clone https://github.com/the-vampiire/auto-media-tweeting.git auto_media_tweeta`
+- cd into the cloned directory `cd auto_media_tweeta`
+- install dependancies using `pip install -r requirements.txt`
+- create the following directories
 	- `dump` directory
 	- `used` directory
 ## Customize
