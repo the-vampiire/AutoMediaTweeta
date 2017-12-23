@@ -14,19 +14,22 @@
 
 # Instructions
 
-#### Setup
+## Setup
 - clone this repo using:
 	- `git clone https://github.com/the-vampiire/auto-media-tweeting.git auto_tweet`
 - in the newly created `auto_tweet` directory create the `unused` directory and `used` directory using:
 	- `mkdir unused used`
-### Customize
+## Customize
 - in the `unused` directory add all of the image / gif / video files you would like to upload
 - leave the `used` directory empty
 - in the `config.py` file add your Twitter credentials
 	- you can find these on your app page at https://apps.twitter.com (if you dont have an app create one for free to obtain the credentials)
 	- click on your app then go to `keys and token` tab and copy over the credentials
 - in the `tags.txt` file add comma separated hashtags that will be added to the tweet
-	- **DO NOT INCLUDE `#`** this is applied internally.
+	- you can put `#` before each tag or the program will add them for you
+	- separate each tag by a comma and a space `, `
+	- upper or lowercase is fine but **only alpha-numeric characters are allowed**
+	- separate each tag by a comma and a space `, `
 	- example content of `tags.txt`: `coding, python, autotweeting`
 	- would be automatically converted and added to the upload as `#coding #python #autotweeting`
 
