@@ -1,3 +1,40 @@
+# What is my purpose?
+- tweet one file at a time out of a `dump` directory using a list of hashtags, reports with a success or failure, then moves the tweeted file to the `used` directory
+
+# Forked Modifications
+- add Twitter credentials to the `config.py` file
+	- CONSUMER_KEY
+	- CONSUMER_SECRET
+	- ACCESS_TOKEN
+	- ACCESS_TOKEN_SECRET
+- uses 'dump' directory to store the collection of unused images / videos
+- uses 'used' directory to store the used files
+- uses a `tags.txt` file that holds a CSV of hashtags to apply to each tweet
+- handles `mp4, png, jpg, jpeg, gif, mpeg` image / gif / video file types 
+
+## Instructions
+
+#### Setup
+- clone this repo using `git clone https://github.com/the-vampiire/auto-media-tweeting.git auto_tweet`
+- in the newly created `auto_tweet` directory create the following directories
+	- `dump` directory
+	- `used` directory
+### Customize
+- in the `dump` directory add all of the image / gif / video files you would like to upload
+- leave the `used` directory empty
+- in the `config.py` file add your Twitter credentials
+	- you can find these on your app page at https://apps.twitter.com (if you dont have an app create one for free to obtain the credentials)
+	- click on your app then go to `keys and token` tab and copy over the credentials
+- in the `tags.txt` file add comma separated hashtags that will be added to the tweet
+	- **DO NOT INCLUDE `#`** this is applied internally.
+	- example content of `tags.txt`: `coding, python, autotweeting`
+	- would be automatically converted and added to the upload as `#coding #python #autotweeting`
+
+<hr>
+<hr>
+
+## Original Documentation Below
+
 # Large Video Upload
 
 This Python sample demonstrates the following process of uploading large video files asynchronously with the Twitter API.

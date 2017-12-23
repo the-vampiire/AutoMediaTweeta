@@ -1,61 +1,34 @@
-import os
-import sys
-import time
-
-import json
-import requests
-from requests_oauthlib import OAuth1
-
+import os, sys, time, json, requests
 
 MEDIA_ENDPOINT_URL = 'https://upload.twitter.com/1.1/media/upload.json'
 POST_TWEET_URL = 'https://api.twitter.com/1.1/statuses/update.json'
 
-CONSUMER_KEY = 'your-consumer-key'
-CONSUMER_SECRET = 'your-consumer-secret'
-ACCESS_TOKEN = 'your-access-token'
-ACCESS_TOKEN_SECRET = 'your-access-secret'
+class AnyMediaTweet(object):
 
-VIDEO_FILENAME = 'path/to/video/file'
-
-
-oauth = OAuth1(CONSUMER_KEY,
-  client_secret=CONSUMER_SECRET,
-  resource_owner_key=ACCESS_TOKEN,
-  resource_owner_secret=ACCESS_TOKEN_SECRET)
-
-
-class VideoTweet(object):
-
-  def __init__(self, file_name):
-    '''
-    Defines video tweet properties
-    '''
-    self.video_filename = file_name
-    self.total_bytes = os.path.getsize(self.video_filename)
+  def __init__(self, media_path, mime_type, o_auth_token, tags):
+   
+    self.media_path = media_path
+    self.mime_type = mime_type
+    self.tags = tags or "Automated using the Any Media Tweet script by #vampiire"
+    self.token = o_auth_token
+    self.total_bytes = os.path.getsize(self.media_path)
     self.media_id = None
     self.processing_info = None
-
+    self.response = None
 
   def upload_init(self):
-    '''
-    Initializes Upload
-    '''
-    print('INIT')
-
     request_data = {
       'command': 'INIT',
-      'media_type': 'video/mp4',
+      'media_type': self.mime_type,
       'total_bytes': self.total_bytes,
-      'media_category': 'tweet_video'
     }
 
-    req = requests.post(url=MEDIA_ENDPOINT_URL, data=request_data, auth=oauth)
-    media_id = req.json()['media_id']
-
-    self.media_id = media_id
-
-    print('Media ID: %s' % str(media_id))
-
+    req = requests.post(url = MEDIA_ENDPOINT_URL, data = request_data, auth = self.token)
+    try:
+      self.media_id = req.json()['media_id']
+    except KeyError:
+        print('Invalid credentials')
+        exit()
 
   def upload_append(self):
     '''
@@ -63,7 +36,7 @@ class VideoTweet(object):
     '''
     segment_id = 0
     bytes_sent = 0
-    file = open(self.video_filename, 'rb')
+    file = open(self.media_path, 'rb')
 
     while bytes_sent < self.total_bytes:
       chunk = file.read(4*1024*1024)
@@ -80,7 +53,8 @@ class VideoTweet(object):
         'media':chunk
       }
 
-      req = requests.post(url=MEDIA_ENDPOINT_URL, data=request_data, files=files, auth=oauth)
+      req = requests.post(url = MEDIA_ENDPOINT_URL, data = request_data, files = files, auth = self.token)
+      
 
       if req.status_code < 200 or req.status_code > 299:
         print(req.status_code)
@@ -96,9 +70,6 @@ class VideoTweet(object):
 
 
   def upload_finalize(self):
-    '''
-    Finalizes uploads and starts video processing
-    '''
     print('FINALIZE')
 
     request_data = {
@@ -106,17 +77,12 @@ class VideoTweet(object):
       'media_id': self.media_id
     }
 
-    req = requests.post(url=MEDIA_ENDPOINT_URL, data=request_data, auth=oauth)
-    print(req.json())
+    req = requests.post(url = MEDIA_ENDPOINT_URL, data = request_data, auth = self.token)
 
     self.processing_info = req.json().get('processing_info', None)
     self.check_status()
 
-
   def check_status(self):
-    '''
-    Checks video processing status
-    '''
     if self.processing_info is None:
       return
 
@@ -142,28 +108,22 @@ class VideoTweet(object):
       'media_id': self.media_id
     }
 
-    req = requests.get(url=MEDIA_ENDPOINT_URL, params=request_params, auth=oauth)
+    req = requests.get(url = MEDIA_ENDPOINT_URL, params = request_params, auth = self.token)
     
     self.processing_info = req.json().get('processing_info', None)
     self.check_status()
 
 
   def tweet(self):
-    '''
-    Publishes Tweet with attached video
-    '''
     request_data = {
-      'status': 'I just uploaded a video with the @TwitterAPI.',
+      'status': self.tags,
       'media_ids': self.media_id
     }
 
-    req = requests.post(url=POST_TWEET_URL, data=request_data, auth=oauth)
-    print(req.json())
+    req = requests.post(url = POST_TWEET_URL, data = request_data, auth = self.token)
+    response = req.json()
+    tweet_link = response['entities']['media'][0]['expanded_url']
+    print("\nTweet link: {}".format(tweet_link))
 
-
-if __name__ == '__main__':
-  videoTweet = VideoTweet(VIDEO_FILENAME)
-  videoTweet.upload_init()
-  videoTweet.upload_append()
-  videoTweet.upload_finalize()
-  videoTweet.tweet()
+    # uncomment for full response during debugging
+    # print(json.dumps(response, sort_keys=True, indent=2))
