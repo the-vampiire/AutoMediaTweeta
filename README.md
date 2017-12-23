@@ -32,7 +32,10 @@
 	- separate each tag by a comma and a space `, `
 	- example content of `tags.txt`: `coding, python, autotweeting`
 	- would be automatically converted and added to the upload as `#coding #python #autotweeting`
-
+## Use
+- once you have configured and customized you can start the program from the `auto_tweet` directory by entering:
+	- `python tweet_media.py`
+	
 <hr>
 <hr>
 
