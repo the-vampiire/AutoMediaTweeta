@@ -24,7 +24,7 @@ hashtags = 'tags.txt'
 dump_directory_path = os.path.abspath(dump_directory)
 used_directory_path = os.path.abspath(used_directory)
 hashtag_list = open(os.path.abspath(hashtags), 'r').read().split(', ')
-hashtags = " ".join(['#'+hashtag for hashtag in hashtag_list]) if hashtag_list[0] else None
+hashtags = " ".join(['#'+hashtag if hashtag[0] != '#' else hashtag for hashtag in hashtag_list]) if hashtag_list[0] else None
 
 try:
   next_upload = os.listdir(dump_directory_path)[0]

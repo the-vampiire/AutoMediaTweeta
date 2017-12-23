@@ -7,18 +7,18 @@
 	- CONSUMER_SECRET
 	- ACCESS_TOKEN
 	- ACCESS_TOKEN_SECRET
-- uses 'dump' directory to store the collection of unused images / videos
-- uses 'used' directory to store the used files
+- uses `dump` directory to store the collection of unused images / videos
+- uses `used` directory to store the used files that are moved after tweeting
 - uses a `tags.txt` file that holds a CSV of hashtags to apply to each tweet
 - handles `mp4, png, jpg, jpeg, gif, mpeg` image / gif / video file types 
 
 ## Instructions
 
 #### Setup
-- clone this repo using `git clone https://github.com/the-vampiire/auto-media-tweeting.git auto_tweet`
-- in the newly created `auto_tweet` directory create the following directories
-	- `dump` directory
-	- `used` directory
+- clone this repo using:
+	- `git clone https://github.com/the-vampiire/auto-media-tweeting.git auto_tweet`
+- in the newly created `auto_tweet` directory create the `dump` directory and `used` directory using:
+	- `mkdir dump used`
 ### Customize
 - in the `dump` directory add all of the image / gif / video files you would like to upload
 - leave the `used` directory empty
